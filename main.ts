@@ -1,17 +1,36 @@
 import * as express from "express";
 import * as path from "path";
-import * as http from "http";
+
+var md = require('markdown-it')({
+    html: false,
+    linkify: true,
+    typographer: true
+  });
 
 const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
+const users = {};
 
 io.on('connection', (socket) => {
-    console.log("User Connected");
-    socket.emit("system-msg", {content : 'Seseorang Connected'});
+    //welcome and not welcome
+    socket.on('new-connect',(n)=>{
+        users[socket.id] = n;
+        socket.broadcast.emit("system-msg", {content : `${users[socket.id]} Bergabung. Selamat datang!`});
+    });
+    socket.on("disconnect", ()=> {
+        console.log(socket.id)
+        socket.broadcast.emit("system-msg", {content:`${users[socket.id]} Keluar. Sampai jumpa`});
+        delete users[socket.id];
+    });
 
-    socket.on('send-message', (msg) => {socket.broadcast.emit('send-message', {name:(msg["name"]||"Anonymous"),timestamp: new Date(),content:msg["content"]});});
-    socket.on("disconnect", ()=> {socket.emit("system-msg", {content:"Seseorang Disconnect"})});
+    //message
+    socket.on('is-typing',()=>{socket.broadcast.emit('is-typing', {n:users[socket.id]});})
+
+    socket.on('send-message', (msg) => {
+        if(!msg.content) return null;
+        socket.broadcast.emit('send-message', {name:(users[socket.id]?users[socket.id]:"Anonymous"),timestamp: new Date(),content:md.render(msg["content"])});
+    });
 
     setInterval(()=> {
         socket.emit("ping-stat",{time:new Date().getTime()})

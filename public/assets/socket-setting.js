@@ -1,15 +1,15 @@
 
 $(function(){
-        var name = localStorage["username"];
         var socket = io();
+        
+        if(!localStorage["username"]){
+            localStorage.setItem("username",prompt("Siapa namamu? :D"))
+        }
+        socket.emit('new-connect',localStorage["username"])
 
-        $('form#send-message').submit(function(e) {
-        e.preventDefault(); // prevents page reloading
-        var time = new Date();
-        socket.emit('send-message', { name : name ,content : $('.textarea').val()});
-        appendMsg(1,{name:"You",content:$('.textarea').val(),timestamp:time})
-        $('.textarea').val('');
-        return false;
+        $('form#send-message').submit(e=>sendMessage(e, socket));
+        $('textarea.textarea').on('keypress',function(e) {
+            if(e.which == 13) {sendMessage(e, socket)};
         });
 
         socket.on("ping-stat", function(stat){
@@ -24,6 +24,16 @@ $(function(){
         socket.on('system-msg', function(msg){
             $(".chatting-pool").append($("<div class=\"bubble-chat system-msg\">").text(`${msg.content}`));
             $(".chatting-pool").scrollTop(function() { return this.scrollHeight; });
+        });
+        var isRunning = false;
+        socket.on('is-typing', function(n){
+            $("p#typing-stat").text(n+" is Typing...");
+            if(isRunning) return false
+            isRunning = true
+            setTimeout(()=>{
+                $("p#typing-stat").text("Connected");
+                isRunning =false;
+            },250)
         })
     });
     
@@ -40,7 +50,7 @@ function appendMsg(type,msg){
     .append($(`<div class="bubble-chat ${msgClass}">`)
     .append($("<div class=\"header\">").append($("<span>").append($("<b>").text(msg.name+" ")))
     .append($("<span>").text(timestamp(msg.timestamp)))
-    .append($("<div class=\"content\">").append($("<p>").text(msg.content)))))
+    .append($("<div class=\"content\">").append($("<p>").html(msg.content)))))
     );
     $(".chatting-pool").scrollTop(function() { return this.scrollHeight; });
 }

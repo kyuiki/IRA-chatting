@@ -1,9 +1,29 @@
+
 $(function(){
+    var socket = io();
     var timePhone = setInterval(function(){
-        $("#time-phone").html(timeClock())
+        $("#time-phone").html(timeClock());
+        if(!socket.connected) {
+            $("#signal-phone").attr({src:"assets/img/sinyal_4.png"});
+            $("p#typing-stat").text("❌ Disconnected!");
+    }
     },1000);
-    if(!localStorage["username"]){
-        localStorage.setItem("username",prompt("Tolong masukan nama kamu :D"))
+    $(".textarea").on("input",(e)=>{
+        socket.emit('is-typing',localStorage["username"]);
+    })
+    try{
+    navigator.getBattery().then(function(bt) {
+        batteryUpdate();
+        bt.addEventListener('levelchange', function(){
+            batteryUpdate()
+        })
+        function batteryUpdate(){
+            $("#battery-phone").attr({src:"assets/img/"+battery(bt.level *4)});
+        }
+      
+      });
+    }catch(err){
+        alert(err)
     }
 });
 
@@ -27,4 +47,31 @@ function signal(strength){
             break;
     }
     return out + ".png"
+}
+function battery(strength){
+    let out = "baterai_3";
+    switch (Math.floor(strength)) {
+        case 4:
+        case 3:
+            out = "baterai_0"
+            break;
+        case 2:
+            out = "baterai_1"
+            break;
+        case 1:
+            out = "baterai_2"
+            break;
+        default:
+            break;
+    }
+    return out + ".png"
+}
+
+function sendMessage(e, socket){
+    e.preventDefault(); // prevents page reloading
+    var name = localStorage["username"];
+    var time = new Date();
+    socket.emit('send-message', { name : name ,content : $('.textarea').val()});
+    appendMsg(1,{name:"You",content:$('.textarea').val(),timestamp:time})
+    $('.textarea').val('');
 }

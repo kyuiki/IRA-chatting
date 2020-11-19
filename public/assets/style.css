@@ -32,6 +32,24 @@ body{
     position: relative;
     background: #a11841;
 }
+.main-layout .container-layout{
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    max-width: 726px;
+}
+.container-layout .content{
+    padding: 15px 10px;
+    overflow-y: auto;
+}
+.main-layout.alert{
+    background: rgba(0,0,0,.5);
+    position: fixed;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
 .notif-bar{
     color: white;
     background: rgba(0,0,0,.5);
@@ -124,8 +142,14 @@ body{
     height: 50px;
 }
 /* Bubble Chat  */
+.bubble-chat .content img{
+    max-width: 100%;
+    max-height: 100%;
+}
 .bubble-chat {
+    animation: bubble-chat-int 1s ease-out ;
     background: #ffffff;
+    word-break: break-all;
     display: table;
     padding: 1px 10px 0px 10px;
     margin: 5px 10px;
@@ -152,5 +176,18 @@ body{
     border: 5px solid transparent;
     border-image: url(img/bord_dark.png) 1 1 round;
 }
-
+/* Features */
+.word-cutter{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.cool-shadow{
+    border: 5px solid transparent;
+    box-shadow: 5px 5px 0 0 rgba(0,0,0,.5),5px 5px 0 0 rgba(0,0,0,.5) inset;
+}
 /* ^>v< */
+@keyframes bubble-chat-int {
+    0%{transform: translateY(-20px); opacity: 0;}
+    50%{transform: translateY(-5px);}
+}
