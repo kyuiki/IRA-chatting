@@ -1,0 +1,156 @@
+@font-face {
+    font-family: Minecraft;
+    src: url('/assets/fonts/mcreg.otf');
+}
+@font-face {
+	font-family: Minecraft;
+	font-weight: bold;
+    src: url('/assets/fonts/mcB.otf');
+}
+@font-face {
+	font-family: Minecraft;
+	font-weight: bold;
+	font-style: oblique;
+    src: url('/assets/fonts/mcBI.otf');
+}
+@font-face {
+	font-family: Minecraft;
+	font-style: oblique;
+    src: url('/assets/fonts/mcI.otf');
+}
+
+*{
+    font-family: Minecraft;
+    image-rendering: pixelated;
+}
+body{
+    padding: 0;
+}
+.main-layout{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #a11841;
+}
+.notif-bar{
+    color: white;
+    background: rgba(0,0,0,.5);
+}
+.notif-bar .icon-notif{
+    padding: 5px;
+    height: 40px;
+}
+#time-phone.icon-notif{
+    padding: 0 5px 0 0;
+    position: relative;
+    font-size: 23px;
+    top: 5px;
+}
+.wa-top-nav {
+    background: #1e2335;
+    color: #fff;
+    height: 70px;
+    width: 100%;
+}
+.marg-conf{
+    margin: 0 5px;
+}
+.marg-conf .wa-name{
+    margin: 0 10px;
+    line-height: 0;
+    width: 100%;
+}
+.fixed-a{
+    min-width: 140px;
+}
+.wa-name h1{
+    font-size: 25px;
+}
+.icon-wa .icon-nav{
+    position: relative;
+    bottom: -10px;
+    margin-left: 10px;
+}
+.icon-wa img{
+    height: 50px;
+    padding: 10px 0;
+    margin: 0 auto;    
+    cursor: pointer;
+}
+.icon-wa .profpic{
+    margin-left: 10px;
+    height: 70px;
+}
+.chat-body {
+    width: 100%;
+    height: calc( 100vh - 160px );
+}
+.chatting-pool{
+    border: 1px solid transparent;
+    height: calc(100% - 65px);
+    overflow-y:auto;
+}
+.input-layout{
+    height: 65px;
+    position: relative;
+    bottom: 0;
+}
+.textarea{
+    margin:5px;
+    background: #1e2335;
+    color:#fff;
+    /* border-radius: 17px; */
+    border: 5px solid transparent;
+    border-image: url(img/bord_dark.png) 1 1 round;
+    padding:2px;
+    outline: none;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow-y: auto;
+    box-shadow: 6px 6px 0 0 rgba(0,0,0,.5),6px 6px 0 0 rgba(0,0,0,.5) inset;
+}
+.input-icon{
+    text-align: center;
+}
+.input-icon img{
+    height: 100%;
+    padding: 10px 0;
+    margin: auto 0;
+    cursor: pointer;
+}
+.bottom-phone{
+    background: rgba(0,0,0,.5);
+    color: #fff;
+    height: 50px;
+}
+/* Bubble Chat  */
+.bubble-chat {
+    background: #ffffff;
+    display: table;
+    padding: 1px 10px 0px 10px;
+    margin: 5px 10px;
+    max-width: 90%;
+    width: auto;
+    border: 5px solid transparent;
+    border-image: url(img/bord_light.png) 1 1 round;
+    box-shadow: 5px 5px 0 0 rgba(0,0,0,.5),5px 5px 0 0 rgba(0,0,0,.5) inset;
+}
+.bubble-chat.system-msg {
+    background: #2103a8;
+    padding: 1px 10px 0px 10px;
+    margin: 10px auto;
+    color: #fff;
+    text-align: center;
+    width: 50%;
+    border: 5px solid transparent;
+    box-shadow: 5px 5px 0 0 rgba(0,0,0,.5),5px 5px 0 0 rgba(0,0,0,.5) inset;
+}
+.bubble-chat.your-message{
+    margin: 10px 5px 10px auto;
+    color: #fff;
+    background: #1e2335 ;
+    border: 5px solid transparent;
+    border-image: url(img/bord_dark.png) 1 1 round;
+}
+
+/* ^>v< */

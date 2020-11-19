@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="assets/style.css"/>
+        <script src="assets/main.js"></script>
+        <script src="socket.io/socket.io.js"></script>
+        <script src="assets/socket-setting.js"></script>
+    </head>
+    <body>
+        <div class="main-layout">
+            <div class="notif-bar">
+                <img class="icon-notif" src="assets/img/ic_discord.png"/>
+                <div class="float-right">
+                    <span><span id="net-stat">X</span> MS</span>
+                    <img class="icon-notif" id="signal-phone" src="assets/img/sinyal_3.png"/>
+                    <img class="icon-notif" src="assets/img/baterai_1.png"/>
+                    <span class="icon-notif" id="time-phone">XX:XX</span>
+                </div>
+            </div>
+            <div class="wa-top-nav d-flex">
+                <div class="icon-wa marg-conf"><img class="icon-nav" src="assets/img/back_gui.png"></div>
+                <div class="d-flex marg-conf w-100">
+                    <div class="icon-wa">
+                        <img class="profpic" src="assets/img/prof_gui.png">
+                    </div>
+                    <div class="wa-name pt-2">
+                        <h1>Test Channel</h1>
+                        <p>Beta</p>
+                    </div>
+                </div>
+                <div class="marg-conf fixed-a icon-wa">
+                    <img class="icon-nav" src="assets/img/vc_gui.png"/>
+                    <img class="icon-nav" src="assets/img/sc_gui.png"/>
+                    <img class="icon-nav" src="assets/img/dot_gui.png"/>
+                </div>
+            </div>
+            <div class="chat-body">
+                <div class="chatting-pool">
+                </div>
+                <form id="send-message" class="input-layout d-flex">
+                    <div class="w-25 input-icon">
+                        <img class="" src="assets/img/emoji_gui.png"/>
+                    </div>
+                    <textarea class="textarea w-100" placeholder="Type a Message..." style="resize: none;"></textarea>
+                    </textarea>
+                    <button class="w-25 input-icon" style="background: transparent;border: none;outline: none;">
+                        <img class="" src="assets/img/send_gui.png"/>
+                    </button>
+                </form>
+            </div>
+            <div class="bottom-phone">
+                Phone Bottom Navigation
+            </div>
+        </div>
+    </body>
+</html>
