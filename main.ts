@@ -21,21 +21,23 @@ io.on('connection', (socket) => {
     });
 
     //message
-    socket.on('is-typing',()=>{socket.broadcast.emit('is-typing', {name:users[socket.id]+" is typing..."});})
-
     socket.on('send-message', (msg) => {
         if(!msg.content) return io.to(socket.id).emit("system-bot-msg",{timestamp:new Date().getTime(),name:"Red-Creeper",content:"Your message wasnt send! you were sending the blank message!"});
-        socket.broadcast.emit('send-message', {name:(users[socket.id]?users[socket.id]:"Anonymous"),timestamp: new Date(),content:md.render(msg["content"])});
+        socket.broadcast.emit('send-message', {name:(users[socket.id]["name"]?users[socket.id]:"Anonymous"),timestamp: new Date(),content:md.render(msg["content"])});
     });
+    socket.on('is-typing',()=>{
+        socket.broadcast.emit('is-typing', `${users[socket.id]} is typing...`);
+    });
+    //ping
+    socket.on("ping-send",d=>{
+        if(!d["time"] || typeof d["time"] != 'number' || d["time"].toString().length > 100 || (d["time"] - new Date().getTime()) > 100000) return io.to(socket.id).emit("system-bot-msg",{timestamp:new Date().getTime(),name:"Red-Creeper",content:`Invalid Ping Date range! Time Lagged out ${d["time"] - new Date().getTime()} ms behind`});
+        io.to(socket.id).emit("ping-send",d);
+    })
     
     socket.on("disconnect", ()=> {
         if(!users[socket.id]) return;
         socket.broadcast.emit("system-msg", {content:`${users[socket.id]} Keluar. Sampai jumpa`});
     });
-
-    setInterval(()=> {
-        socket.emit("ping-stat",{time:new Date().getTime()})
-    },1000);
 });
 
 app.set("view engine", 'ejs');
@@ -50,3 +52,12 @@ app.get("*", (req, res) => {
 })
 
 server.listen((process.env.PORT||"6942"), ()=>{console.log("Ok its running!")})
+
+interface usersData {
+    name : string,
+    id : string,
+    theme : {
+        boxColor: string|number,
+        nickColor: string|number
+    }
+}

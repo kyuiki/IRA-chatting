@@ -7,17 +7,17 @@ $(function(){
             localStorage.setItem("username",prompt("Siapa namamu? :D"))
         }
         socket.emit('new-connect',localStorage["username"])
-
         $('form#send-message').submit(e=>sendMessage(e, socket));
         $('textarea.textarea').on('keypress',function(e) {
             if(e.which == 13 && !e.shiftKey) {sendMessage(e, socket)};
         });
 
-        socket.on("ping-stat", function(stat){
+        //ping
+        socket.on("ping-send", function(stat){
             $("p#typing-stat").text("Connected");
             var ping1 = new Date().getTime();
             $("#net-stat").text(Math.abs(ping1 - stat.time))
-            $("#signal-phone").attr({src:"assets/img/"+signal(Math.abs(ping1 - stat.time)/250)});
+            $("#signal-phone").attr({src:"assets/img/"+signal(Math.abs(ping1 - stat.time)/400)});
         })
         socket.on('send-message', function(msg){
             appendMsg(0, msg)
@@ -34,14 +34,23 @@ $(function(){
         });
         var isRunning = false;
         socket.on('is-typing', function(nu){
-            $("p#typing-stat").text(nu.name);
+            $("p#typing-stat").text(nu);
             if(isRunning) return false
             isRunning = true
             setTimeout(()=>{
                 $("p#typing-stat").text("Connected");
                 isRunning =false;
-            },250)
+            },500)
         })
+        sendPings();
+        function sendPings(){
+            function pinging(){
+                var sendPing = new Date().getTime();
+                socket.emit("ping-send",{time:sendPing});
+            }
+            pinging()
+            setInterval(()=>pinging(),2000);
+        }
     });
     
 
