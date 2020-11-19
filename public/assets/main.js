@@ -72,6 +72,6 @@ function sendMessage(e, socket){
     var name = localStorage["username"];
     var time = new Date();
     socket.emit('send-message', { name : name ,content : $('.textarea').val()});
-    appendMsg(1,{name:"You",content:$('.textarea').val(),timestamp:time})
+    appendMsg(1,{name:"You",content:window.markdownit({ html: false, linkify: true, typographer: true, breaks:true }).render($('.textarea').val()),timestamp:time})
     $('.textarea').val('');
 }

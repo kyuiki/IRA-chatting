@@ -156,7 +156,6 @@ body{
     max-width: 90%;
     width: auto;
     border: 5px solid transparent;
-    border-image: url(img/bord_light.png) 1 1 round;
     box-shadow: 5px 5px 0 0 rgba(0,0,0,.5),5px 5px 0 0 rgba(0,0,0,.5) inset;
 }
 .bubble-chat.system-msg {
@@ -174,7 +173,12 @@ body{
     color: #fff;
     background: #1e2335 ;
     border: 5px solid transparent;
-    border-image: url(img/bord_dark.png) 1 1 round;
+}
+.bubble-chat.bot-message{
+    color: rgb(66, 1, 1);
+    text-shadow: 1px 1px 0 rgba(0,0,0,.5);
+    background: repeating-linear-gradient(45deg ,#e66465, #e66465 20px, #fc5c00 20px, #fc5c00 40px); ;
+    border: 5px solid transparent;
 }
 /* Features */
 .word-cutter{
