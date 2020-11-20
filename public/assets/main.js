@@ -9,7 +9,7 @@ $(function(){
     }
     },1000);
     $(".textarea").on("input",(e)=>{
-        socket.emit('is-typing',localStorage["username"]);
+        socket.emit('is-typing', {name:localStorage["username"]});
     })
     try{
     navigator.getBattery().then(function(bt) {
