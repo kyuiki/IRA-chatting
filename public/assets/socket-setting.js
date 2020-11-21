@@ -4,8 +4,10 @@ $(function(){
         var md = window.markdownit();
         
         if(!localStorage["username"]){
-            localStorage.setItem("username",prompt("Siapa namamu? :D"))
+            localStorage.setItem("username",prompt("Whats your name? :D"))
         }
+        $('#oldName-show').text(localStorage["username"])
+        
         socket.emit('new-connect',localStorage["username"])
         $('form#send-message').submit(e=>sendMessage(e, socket));
         $('textarea.textarea').on('keypress',function(e) {
@@ -14,7 +16,7 @@ $(function(){
 
         //ping
         socket.on("ping-send", function(stat){
-            $("p#typing-stat").text("Connected");
+            $("p#typing-stat").text(stat.count+" Connected");
             var ping1 = new Date().getTime();
             $("#net-stat").text(Math.abs(ping1 - stat.time))
             $("#signal-phone").attr({src:"assets/img/"+signal(Math.abs(ping1 - stat.time)/400)});
@@ -65,7 +67,8 @@ function appendMsg(type,msg){
     if(type==2) msgClass = "bot-message";
     $(".chatting-pool").append($("<div class=\"w-100\">")
     .append($(`<div class="bubble-chat ${msgClass}">`)
-    .append($("<div class=\"header\">").append($("<span>").append($("<b>").text(msg.name+" ")))
+    .append($("<div class=\"header\">").html(`<img class="delete_btn cool-shadow-sm" onclick="$(this).parent().parent().parent().remove()" src="assets/img/del_gui.png">`)
+    .append($("<span>").append($("<b>").text(msg.name+" ")))
     .append($("<span>").text(timestamp(msg.timestamp)))
     .append($("<div class=\"content\">").append($("<p>").html(msg.content)))))
     );

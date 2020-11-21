@@ -19,7 +19,12 @@
                     <div class="text-right w-100 pt-3 pr-3"><h2>Welcome!</h2></div>
                 </div> 
                 <div class="content">
-                    <center><h2>IRA-Chatting V1.3 </h2></center>
+                    <div class="py-3 px-2 cool-shadow">
+                        <p>Your name was <b id="oldName-show"></b>. Do you want to change your name? Type below.</p>
+                        <input id="your-name" type="text" maxlength="32" placeholder="Change Name?"/>
+                        <button onclick="changeData('username','#your-name');$(this).parent().remove()">Change name</button>
+                    </div>
+                    <center><h2>IRA-Chatting V1.4.0 </h2></center>
                     <h3>What's new?</h3>
                     <ol>
                         <li>Markdown Support</li>
@@ -27,14 +32,16 @@
                         <li>Typing Status (Beta!)</li>
                         <li>User Disconnect / Connected Message</li>
                         <li>A Red Creeper Bot (Like Clyde on Discord)</li>
+                        <li>Badword Detection (Like Red-Creeper)</li>
+                        <li>Name Change</li>
+                        <li>Delete Message (Not deleting other!)</li>
+                        <li>CoolDown (500 ms)</li>
                         <li>Accurate Ping</li>
                     </ol>
                     <h3>Future Updates!</h3>
                     <ol>
                         <li>Private Message</li>
                         <li>Custom Theme</li>
-                        <li>A Red Creeper Bot (Like Clyde on Discord)</li>
-                        <li>Badword Detection (Like Red-Creeper)</li>
                         <li>And much more!..</li>
                     </ol>
                 </div>

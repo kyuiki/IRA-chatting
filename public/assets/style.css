@@ -21,7 +21,13 @@
 
 *{
     font-family: Minecraft;
-    image-rendering: pixelated;
+    image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
+    image-rendering: -moz-crisp-edges;          /* Firefox                        */
+    image-rendering: -o-crisp-edges;            /* Opera                          */
+    image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+    image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
+    -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
+    image-rendering: pixelated; 
 }
 body{
     padding: 0;
@@ -141,6 +147,22 @@ body{
     color: #fff;
     height: 50px;
 }
+/* something */
+blockquote {
+    border-left: 5px solid #385061;
+    padding-left: 10px;
+}
+pre{
+    overflow: hidden;
+}
+pre code{
+    background: none;
+}
+code{
+    background: rgb(26, 30, 60);
+    padding: 3px 6px;
+    border-radius: 3px;
+}
 /* Bubble Chat  */
 .bubble-chat .content img{
     max-width: 100%;
@@ -157,6 +179,20 @@ body{
     width: auto;
     border: 5px solid transparent;
     box-shadow: 5px 5px 0 0 rgba(0,0,0,.5),5px 5px 0 0 rgba(0,0,0,.5) inset;
+}
+.bubble-chat .delete_btn {
+    cursor: pointer;
+    display: none;
+    position: relative;
+    float: right;
+    right: -15px;
+    bottom: 11px;
+    height: 30px;
+    background: #fff;
+    padding: 3px;
+}
+.bubble-chat:hover .delete_btn {
+    display: block;
 }
 .bubble-chat.system-msg {
     background: #2103a8;
@@ -189,6 +225,20 @@ body{
 .cool-shadow{
     border: 5px solid transparent;
     box-shadow: 5px 5px 0 0 rgba(0,0,0,.5),5px 5px 0 0 rgba(0,0,0,.5) inset;
+}
+.cool-shadow-sm{
+    border: 2px solid transparent;
+    box-shadow: 2px 2px 0 0 rgba(0,0,0,.5),2px 2px 0 0 rgba(0,0,0,.5) inset;
+}
+*::-webkit-scrollbar-track{
+	border-radius: 10px;
+	background-color: transparent;
+}
+*::-webkit-scrollbar{
+    height: 10px;
+}
+*::-webkit-scrollbar-thumb{
+	background-color: rgba(255,255,255,0.5);
 }
 /* ^>v< */
 @keyframes bubble-chat-int {

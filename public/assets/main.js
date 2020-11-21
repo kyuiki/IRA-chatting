@@ -75,3 +75,6 @@ function sendMessage(e, socket){
     appendMsg(1,{name:"You",content:window.markdownit({ html: false, linkify: true, typographer: true, breaks:true }).render($('.textarea').val()),timestamp:time})
     $('.textarea').val('');
 }
+function changeData(type,id){
+    localStorage[type] = $(id).val();
+}
