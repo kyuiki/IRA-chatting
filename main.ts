@@ -1,12 +1,22 @@
 import * as express from "express";
 import * as path from "path";
+import * as mdiv from "markdown-it-video";
 const f = require("./lib/badword.ts");
+const Database = require("@replit/database");
+const db = new Database()
+
+
 
 var md = require('markdown-it')({
     html: false,
     linkify: true,
     typographer: true,
     breaks: true
+}).use(mdiv, {
+  youtube: { width: 640, height: 390 },
+  vimeo: { width: 500, height: 281 },
+  vine: { width: 600, height: 600, embed: 'simple' },
+  prezi: { width: 550, height: 400 }
 });
 
 const app = express();
@@ -28,6 +38,7 @@ io.on('connection', async (socket) => {
 
     //message
     socket.on('send-message', (msg) => {
+        users[socket.id] = msg.name.replace(/([^A-Za-z0-9])/g, "X").replace(/\s/gi, "_");
         var detect = f.detectBadWord(msg.content);
         if (!msg.content || cooldown[socket.id]) return io.to(socket.id).emit("system-bot-msg", {
             timestamp: new Date().getTime(),
@@ -76,14 +87,15 @@ app.set("views", path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get("/", (req, res) => {
+    console.log(req.ip)
     res.render("index.ejs")
 });
 app.get("*", (req, res) => {
     res.redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ&hmm=too_curious_huh")
 })
 
-server.listen((process.env.PORT || "6942"), () => {
-    console.log("Ok its running!")
+server.listen((process.env.PORT || 6942), () => {
+    console.log("Ok its running! " +(process.env.PORT || 6942))
 })
 
 interface usersData {

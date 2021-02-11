@@ -36,10 +36,11 @@ body{
     width: 100%;
     height: 100%;
     position: relative;
-    background: #a11841;
+    background: #25356b;
 }
 .main-layout .container-layout{
     background: #fff;
+    overflow: hidden;
     width: 100%;
     height: 100%;
     max-width: 726px;
@@ -162,6 +163,12 @@ code{
     background: rgb(26, 30, 60);
     padding: 3px 6px;
     border-radius: 3px;
+}
+input[type=color]{
+    width: 100px;
+    border: none;
+    height: 50px;
+    outline: none;
 }
 /* Bubble Chat  */
 .bubble-chat .content img{

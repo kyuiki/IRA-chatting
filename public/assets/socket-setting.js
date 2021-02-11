@@ -74,3 +74,20 @@ function appendMsg(type,msg){
     );
     $(".chatting-pool").scrollTop(function() { return this.scrollHeight; });
 }
+function signal(strength){
+    let out = "sinyal_3";
+    switch (Math.floor(strength)) {
+        case 0:
+            out = "sinyal_0"
+            break;
+        case 1:
+            out = "sinyal_1"
+            break;
+        case 2:
+            out = "sinyal_2"
+            break;
+        default:
+            break;
+    }
+    return out + ".png"
+}

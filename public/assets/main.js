@@ -78,3 +78,9 @@ function sendMessage(e, socket){
 function changeData(type,id){
     localStorage[type] = $(id).val();
 }
+function changeCSS(id, styleobj){
+/* var newStyleElement = $("head").children(':last');
+ newStyleElement.html(`${data} {}`);*/
+ $(id).css(styleobj)
+
+}
